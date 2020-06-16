@@ -71,6 +71,10 @@ io.on("connection", async (socket) => {
       }
     } catch (e) {}
   });
+
+  socket.on("see_message", (message) => {
+    emitToMultiple(connectedUsers[message.user_from], "message_seen", message);
+  });
 });
 
 function emitToMultiple(sockets, ...args) {
